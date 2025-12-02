@@ -5,12 +5,12 @@ Yüklenen XML dosyalarını analizini yapar ve belirtilen invoiceID değeri ile 
 Proje aynı zamanda kullanıcı yönetimi, kimlik doğrulama ve yetkilendirme süreçlerini destekleyen güvenli bir mimari içerir.
 
 ## Kullanılan Teknolojiler
--Spring Boot
--Hibernate / JPA
--XML DOM Parser
--Spring Security
--JWT
--PostgreSQL
+- Spring Boot
+- Hibernate / JPA
+- XML DOM Parser
+- Spring Security
+- JWT
+- PostgreSQL
 
 <img width="1917" height="757" alt="1Ekran Alıntısı" src="https://github.com/user-attachments/assets/4e3798db-eff6-4109-928c-6010af4eba8d" />
 <img width="1891" height="340" alt="2Ekran Alıntısı" src="https://github.com/user-attachments/assets/9053bb98-7d49-4a34-87c0-0dc9ece08b07" />
