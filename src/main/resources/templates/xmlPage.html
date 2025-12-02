@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+        body, html {
+            height: 100%;
+            font-family: "Inconsolata", sans-serif;
+        }
+
+        .menu {
+            display: none;
+        }
+
+        .center-box {
+            width: 350px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            margin: 150px auto 0 auto;
+        }
+
+        .click-row {
+            padding: 15px;
+            background: #2196F3;
+            color: white;
+            margin-top: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .click-row:hover {
+            background: #1976D2;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+        }
+
+        #xmlContent {
+            margin-top: 15px;
+            padding: 10px;
+            text-align: left;
+            max-height: 200px;
+            overflow: auto;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+            font-family: monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+        <div class="w3-col s3">
+            <a href="/homePage" class="w3-button w3-block w3-black">AnaSayfa</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/xml/xml" class="w3-button w3-block w3-black">XML</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/pdf/pdf" class="w3-button w3-block w3-black">PDF</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/users/userDetails" class="w3-button w3-block w3-black">Kullancı İşlemleri</a>
+        </div>
+    </div>
+</div>
+
+<div class="center-box w3-animate-opacity">
+    <h3>XML Dosyasını Seç</h3>
+
+    <input type="file" id="xmlFile" accept=".xml" />
+    <input type="text" id="invoiceID" placeholder="Invoice ID girin" />
+
+    <div class="click-row" onclick="uploadXmlFile()">
+        Kontrol Et
+    </div>
+
+</div>
+
+<script>
+    function uploadXmlFile() {
+        const fileInput = document.getElementById('xmlFile');
+        const invoiceID = document.getElementById('invoiceID').value;
+
+        if (!fileInput.files.length) {
+            alert("Lütfen bir XML dosyası seçin!");
+            return;
+        }
+        if (!invoiceID) {
+            alert("Lütfen Invoice ID girin!");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("invoiceID", invoiceID);
+
+        fetch('/api/xml/upload', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('xmlContent').textContent = data;
+            })
+            .catch(err => {
+                document.getElementById('xmlContent').textContent = "Hata: " + err;
+            });
+    }
+</script>
+
+
+</body>
+</html>

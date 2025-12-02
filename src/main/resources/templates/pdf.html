@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+        body, html {
+            height: 100%;
+            font-family: "Inconsolata", sans-serif;
+        }
+
+        .menu {
+            display: none;
+        }
+
+        .center-box {
+            width: 350px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            margin: 150px auto 0 auto;
+        }
+
+        .click-row {
+            padding: 15px;
+            background: #4CAF50;
+            color: white;
+            margin-top: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .click-row:hover {
+            background: #45a049;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+        <div class="w3-col s3">
+            <a href="/homePage" class="w3-button w3-block w3-black">AnaSayfa</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/xml/xml" class="w3-button w3-block w3-black">XML</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/pdf/pdf" class="w3-button w3-block w3-black">PDF</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/users/userDetails" class="w3-button w3-block w3-black">Kullancı İşlemleri</a>
+        </div>
+    </div>
+</div>
+
+<div class="center-box w3-animate-opacity">
+    <h3>XML Dosyasını Seç ve PDF’e Dönüştür</h3>
+
+    <input type="file" id="xmlFile" accept=".xml" />
+
+    <div class="click-row" onclick="convertToPdf()">
+        PDF’e Dönüştür
+    </div>
+</div>
+
+<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
+
+</footer>
+
+<script>
+    function convertToPdf() {
+        const fileInput = document.getElementById('xmlFile');
+        if (!fileInput.files.length) {
+            alert("Lütfen bir XML dosyası seçin!");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        fetch("/api/pdf/pdf", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) throw new Error("PDF oluşturulamadı!");
+                return response.blob();
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = "result.pdf";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            })
+            .catch(error => {
+                alert(error);
+                console.error(error);
+            });
+    }
+</script>
+
+</body>
+</html>

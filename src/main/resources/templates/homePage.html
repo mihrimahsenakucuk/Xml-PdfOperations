@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+        body, html {
+            height: 100%;
+            font-family: "Inconsolata", sans-serif;
+        }
+
+        .menu {
+            display: none;
+        }
+
+        .user-area {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .user-button {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .user-button:hover {
+            background-color: #333;
+        }
+
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fff;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .user-dropdown a {
+            color: black;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .user-dropdown a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+        <div class="w3-col s3">
+            <a href="/homePage" class="w3-button w3-block w3-black">AnaSayfa</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/xml/xml" class="w3-button w3-block w3-black">XML</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/pdf/pdf" class="w3-button w3-block w3-black">PDF</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/users/userDetails" class="w3-button w3-block w3-black">Kullancı İşlemleri</a>
+        </div>
+
+        <div class="user-area">
+            <button onclick="toggleUserDropdown()" class="user-button">Profil ▼</button>
+            <div id="userDropdown" class="user-dropdown">
+                <a href="/profile">Profilim</a>
+                <a href="/logout">Çıkış Yap</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top:80px; text-align:center; font-size:32px; font-weight:bold;">
+    Hoşgeldiniz
+</div>
+
+<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
+</footer>
+
+<script>
+
+    document.getElementById("myLink")?.click();
+
+    function toggleUserDropdown() {
+        var dropdown = document.getElementById("userDropdown");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.user-button')) {
+            var dropdown = document.getElementById("userDropdown");
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

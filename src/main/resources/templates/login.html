@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+        body, html {
+            height: 100%;
+            font-family: "Inconsolata", sans-serif;
+        }
+
+        .center-box {
+            width: 350px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            margin: 150px auto 0 auto;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .small-link {
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #4CAF50;
+            cursor: pointer;
+        }
+
+        .small-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+        <div class="w3-col s12">
+            <a class="w3-button w3-block w3-black w3-center">XmlToPdf</a>
+        </div>
+    </div>
+</div>
+
+<div class="center-box w3-animate-opacity">
+    <h3>Giriş Yap</h3>
+    <form action="/login" method="post">
+        <input type="text" name="username" placeholder="Kullanıcı Adı" class="input-field" required />
+        <input type="password" name="password" placeholder="Şifre" class="input-field" required />
+        <button type="submit" class="button">Giriş Yap</button>
+    </form>
+
+    <span class="small-link" onclick="location.href='/register'">Kayıt Ol</span>
+</div>
+
+<footer class="w3-center w3-light-grey w3-padding-48 w3-large"></footer>
+
+</body>
+</html>

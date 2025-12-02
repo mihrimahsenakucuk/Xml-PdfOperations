@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+        body, html {
+            height: 100%;
+            font-family: "Inconsolata", sans-serif;
+        }
+
+        .center-box {
+            width: 350px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .click-row {
+            padding: 15px;
+            background: #f1f1f1;
+            margin-top: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .click-row:hover {
+            background: #ccc;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+        <div class="w3-col s3">
+            <a href="/homePage" class="w3-button w3-block w3-black">AnaSayfa</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/xml/xml" class="w3-button w3-block w3-black">XML</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/pdf/pdf" class="w3-button w3-block w3-black">PDF</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/users/userDetails" class="w3-button w3-block w3-black">Kullancı İşlemleri</a>
+        </div>
+    </div>
+</div>
+
+<div class="w3-display-middle">
+    <div class="center-box w3-animate-opacity">
+
+        <div class="click-row" onclick="location.href='/login'">
+            Kullanıcı Ekle
+        </div>
+
+        <div class="click-row" onclick="location.href='/api/users/userDelete'">
+            Kullanıcı Sil
+        </div>
+        <div class="click-row" onclick="location.href='/users'">
+            kullanıcı yetkileri
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

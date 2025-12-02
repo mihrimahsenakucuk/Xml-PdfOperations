@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kullanıcı Listesi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+        body, html {
+            height: 100%;
+            font-family: "Inconsolata", sans-serif;
+        }
+
+        .center-box {
+            width: 500px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .user-list {
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .user-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background: #e60000;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #b30000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+        <div class="w3-col s3">
+            <a href="/homePage" class="w3-button w3-block w3-black">AnaSayfa</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/xml/xml" class="w3-button w3-block w3-black">XML</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/pdf/pdf" class="w3-button w3-block w3-black">PDF</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="/api/users/userDetails" class="w3-button w3-block w3-black">Kullanıcı İşlemleri</a>
+        </div>
+    </div>
+</div>
+
+<div class="w3-display-middle">
+    <div class="center-box w3-animate-opacity">
+        <h3>Kayıtlı Kullanıcılar</h3>
+        <div class="user-list" id="userList">
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const apiBase = '/api/users';
+
+    async function loadUsers() {
+        try {
+            const response = await fetch(`${apiBase}/users`);
+            if (!response.ok) throw new Error('Kullanıcılar yüklenemedi!');
+
+            const users = await response.json();
+            const list = document.getElementById('userList');
+            list.innerHTML = '';
+
+            if (users.length === 0) {
+                list.innerHTML = '<p>Hiç kullanıcı bulunamadı.</p>';
+                return;
+            }
+
+            users.forEach(user => {
+                const div = document.createElement('div');
+                div.className = 'user-item';
+
+                div.innerHTML = `
+                    <span>ID: ${user.id} | ${user.username} | ${user.email}</span>
+                    <button class="delete-btn" onclick="deleteUser(${user.id})">Sil</button>
+                `;
+
+                list.appendChild(div);
+            });
+
+        } catch (error) {
+            document.getElementById('userList').innerHTML =
+                `<p style="color:red">${error.message}</p>`;
+        }
+    }
+
+    async function deleteUser(id) {
+        if (!confirm("Bu kullanıcıyı silmek istediğine emin misin?")) return;
+
+        try {
+            const response = await fetch(`${apiBase}/deleteUser/${id}`, {
+                method: 'DELETE'
+            });
+
+            const message = await response.text();
+            alert(message);
+
+            loadUsers();
+
+        } catch (error) {
+            alert("Silme işlemi başarısız!");
+        }
+    }
+
+    window.onload = loadUsers;
+</script>
+
+</body>
+</html>
